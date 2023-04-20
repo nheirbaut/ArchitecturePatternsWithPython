@@ -1,0 +1,23 @@
+{
+    "name": "Architecture Patterns with Python",
+    "dockerFile": "Dockerfile",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "me-dutour-mathieu.vscode-github-actions",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "littlefoxteam.vscode-python-test-adapter",
+                "coenraads.bracket-pair-colorizer-2",
+                "esbenp.prettier-vscode",
+                "bungcip.better-toml"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "poetry install --only main"
+}
