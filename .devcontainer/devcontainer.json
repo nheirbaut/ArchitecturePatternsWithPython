@@ -4,11 +4,14 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash"
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true
             },
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-docker",
                 "me-dutour-mathieu.vscode-github-actions",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "littlefoxteam.vscode-python-test-adapter",
@@ -18,6 +21,5 @@
             ]
         }
     },
-    "remoteUser": "vscode",
     "postCreateCommand": "poetry install --only main"
 }
