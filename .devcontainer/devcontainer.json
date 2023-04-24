@@ -15,7 +15,8 @@
                 "terminal.integrated.defaultProfile.linux": "bash",
                 "python.testing.unittestEnabled": false,
                 "python.testing.pytestEnabled": true,
-                "python.pythonPath": "${containerWorkspaceFolder}/.devcontainer/${input:pickPythonInterpreter}"
+                "python.pythonPath": "${containerWorkspaceFolder}/.devcontainer/${input:pickPythonInterpreter}",
+                "editor.defaultFormatter": "ms-python.black-formatter"
             },
             "extensions": [
                 "ms-python.python",
@@ -26,7 +27,8 @@
                 "littlefoxteam.vscode-python-test-adapter",
                 "coenraads.bracket-pair-colorizer-2",
                 "esbenp.prettier-vscode",
-                "bungcip.better-toml"
+                "bungcip.better-toml",
+                "ms-python.black-formatter"
             ]
         }
     },
