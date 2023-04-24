@@ -6,6 +6,7 @@ authors = ["niels@heirbaut.nl"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+sqlalchemy = "^2.0.10"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"
