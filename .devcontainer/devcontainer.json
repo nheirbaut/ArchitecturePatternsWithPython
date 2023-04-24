@@ -3,10 +3,19 @@
     "dockerFile": "Dockerfile",
     "customizations": {
         "vscode": {
+            "inputs": [
+                {
+                    "id": "pickPythonInterpreter",
+                    "type": "command",
+                    "command": "shellCommand.execute",
+                    "args": ["cat ${containerWorkspaceFolder}/.devcontainer/venv_path.txt"]
+                }
+            ],
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash",
                 "python.testing.unittestEnabled": false,
-                "python.testing.pytestEnabled": true
+                "python.testing.pytestEnabled": true,
+                "python.pythonPath": "${containerWorkspaceFolder}/.devcontainer/${input:pickPythonInterpreter}"
             },
             "extensions": [
                 "ms-python.python",
@@ -21,5 +30,5 @@
             ]
         }
     },
-    "postCreateCommand": "poetry install --only main"
+    "postCreateCommand": "poetry install && . ${containerWorkspaceFolder}/.devcontainer/get_poetry_venv_path.sh > ${containerWorkspaceFolder}/.devcontainer/venv_path.txt"
 }
