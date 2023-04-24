@@ -5,7 +5,10 @@ import model
 def test_orderline_mapper_can_load_lines(session):
     session.execute(
         text(
-            'INSERT INTO order_lines (orderid, sku, qty) VALUES ("order1", "RED-CHAIR", 12), ("order1", "RED-TABLE", 13), ("order2", "BLUE-LIPSTICK", 14)'
+            "INSERT INTO order_lines (orderid, sku, qty) VALUES "
+            '("order1", "RED-CHAIR", 12),'
+            '("order1", "RED-TABLE", 13),'
+            '("order2", "BLUE-LIPSTICK", 14)'
         )
     )
     expected = [
