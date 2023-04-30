@@ -1,22 +1,24 @@
 {
-    "name": "Architecture Patterns with Python",
-    "dockerFile": "Dockerfile",
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "python.testing.unittestEnabled": false,
-                "python.testing.pytestEnabled": true
-            },
-            "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "ms-azuretools.vscode-docker",
-                "littlefoxteam.vscode-python-test-adapter",
-                "coenraads.bracket-pair-colorizer-2",
-                "esbenp.prettier-vscode",
-                "bungcip.better-toml",
-                "ms-python.black-formatter"
-            ]
-        }
-    }
+	"name": "Architecture Patterns with Python",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+		"args": {
+			"VARIANT": "3.11-bullseye"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.editor.defaultFormatter": "ms-python.black-formatter",
+				"python.formatting.provider": "none",
+				"python.testing.pytestEnabled": true,
+				"python.testing.unittestEnabled": false
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
 }
