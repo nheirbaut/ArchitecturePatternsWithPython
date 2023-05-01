@@ -1,9 +1,10 @@
-from sqlalchemy import text
+import pytest
+from sqlalchemy import select, text
 import model
 
-
-def test_orderline_mapper_can_load_lines(session):
-    session.execute(
+@pytest.mark.asyncio
+async def test_orderline_mapper_can_load_lines(session):
+    await session.execute(
         text(
             "INSERT INTO order_lines (orderid, sku, qty) VALUES "
             '("order1", "RED-CHAIR", 12),'
@@ -16,13 +17,14 @@ def test_orderline_mapper_can_load_lines(session):
         model.OrderLine("order1", "RED-TABLE", 13),
         model.OrderLine("order2", "BLUE-LIPSTICK", 14),
     ]
-    assert session.query(model.OrderLine).all() == expected
+    assert (await session.execute(select(model.OrderLine))).scalars().all() == expected
 
 
-def test_orderline_mapper_can_save_lines(session):
+@pytest.mark.asyncio
+async def test_orderline_mapper_can_save_lines(session):
     new_line = model.OrderLine("order1", "DECORATIVE-WIDGET", 12)
     session.add(new_line)
-    session.commit()
+    await session.commit()
 
-    rows = list(session.execute(text('SELECT orderid, sku, qty FROM "order_lines"')))
+    rows = list(await session.execute(text('SELECT orderid, sku, qty FROM "order_lines"')))
     assert rows == [("order1", "DECORATIVE-WIDGET", 12)]
