@@ -1,6 +1,7 @@
 import pytest_asyncio
-from orm import metadata, start_mappers
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+
+from orm import metadata, start_mappers
 
 
 @pytest_asyncio.fixture(scope="session")

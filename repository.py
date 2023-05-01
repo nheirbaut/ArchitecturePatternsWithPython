@@ -1,9 +1,10 @@
 import abc
 
-import model
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
+
+import model
 
 
 class AbstractRepository(abc.ABC):

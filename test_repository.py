@@ -1,8 +1,9 @@
 # pylint: disable=protected-access
-import model
 import pytest
-import repository
 from sqlalchemy.sql import text
+
+import model
+import repository
 
 
 @pytest.mark.asyncio

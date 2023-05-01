@@ -1,6 +1,8 @@
 import pytest
 from sqlalchemy import select, text
+
 import model
+
 
 @pytest.mark.asyncio
 async def test_orderline_mapper_can_load_lines(session):
