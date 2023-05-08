@@ -28,5 +28,7 @@ async def test_orderline_mapper_can_save_lines(session):
     session.add(new_line)
     await session.commit()
 
-    rows = list(await session.execute(text('SELECT orderid, sku, qty FROM "order_lines"')))
+    rows = list(
+        await session.execute(text('SELECT orderid, sku, qty FROM "order_lines"'))
+    )
     assert rows == [("order1", "DECORATIVE-WIDGET", 12)]

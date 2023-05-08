@@ -26,16 +26,12 @@ class SqlAlchemyRepository(AbstractRepository):
 
     async def get(self, reference):
         return (
-            (
-                await self.session.execute(
-                    select(model.Batch)
-                    .options(selectinload(model.Batch._allocations))
-                    .filter_by(reference=reference)
-                )
+            await self.session.execute(
+                select(model.Batch)
+                .options(selectinload(model.Batch._allocations))
+                .filter_by(reference=reference)
             )
-            .scalars()
-            .one()
-        )
+        ).scalar_one()
 
     async def list(self):
         return (
