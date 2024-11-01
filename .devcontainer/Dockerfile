@@ -1,18 +1,26 @@
-ARG VARIANT=3.11-bullseye
-FROM mcr.microsoft.com/devcontainers/python:0-${VARIANT}
+FROM debian:bookworm-slim AS builder
 
-# Install Poetry using Pip
-RUN pip install --upgrade pip \
-    && pip3 install -U pip poetry \
-    # Enable tab completion for bash
-    && poetry completions bash >> /home/vscode/.bash_completion \
-    # Enable tab completion for Zsh
-    && mkdir -p /home/vscode/.zfunc/ \
-    && poetry completions zsh > /home/vscode/.zfunc/_poetry \
-    && echo "fpath+=~/.zfunc\nautoload -Uz compinit && compinit" >> /home/vscode/.zshrc
+ENV CARGO_HOME="/opt/.cargo"
 
-COPY pyproject.toml poetry.lock /tmp/poetry/
-WORKDIR /tmp/poetry
-RUN poetry config virtualenvs.create false \
-    && poetry install \
-    && rm -rf /tmp/poetry
+SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
+
+WORKDIR /opt
+
+# The installer requires curl (and certificates) to download the release archive
+# hadolint ignore=DL3008
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates curl
+
+# Run uv installer
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+FROM mcr.microsoft.com/devcontainers/base:bookworm
+
+ENV CARGO_HOME="/opt/.cargo"
+ENV PATH="$CARGO_HOME/bin/:$PATH"
+ENV PYTHONUNBUFFERED=True
+ENV UV_LINK_MODE=copy
+
+WORKDIR /opt
+
+COPY --from=builder --chown=vscode: $CARGO_HOME $CARGO_HOME
